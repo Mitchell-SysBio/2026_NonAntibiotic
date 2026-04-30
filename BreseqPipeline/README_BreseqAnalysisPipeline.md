@@ -26,7 +26,7 @@
 # Requirements
 - breseq pipeline installed into a conda environment. Make sure to name the evironment "breseq". See https://github.com/barricklab/breseq/wiki for installation instructions 
 - Install prerequisistes for analysis of breseq results and for determining coverage 
-    1. Create a conda environment: conda activate breseqAnalysis
+    1. Create a conda environment: ```conda activate breseqAnalysis```
     2. Install in environment: 
 ```
 conda install bioconda::pysam
@@ -83,9 +83,9 @@ Before starting make sure your environment has these two environments installed
 ## Step 2: Compile summary files from output files
 1.	In the terminal, cd to the ‘Results’ folder 
 2.	Edit the batch_GDrun.sh: put the name of your reference file 
-		- Run the script: bash batch_GDrun.sh
+		- Run the script: ```bash batch_GDrun.sh```
 		- This will activate the ‘breseq’ environment and create a comparison table in ‘html’ and ‘tsv’ format
-3.	Run the script: bash batch_processData.sh
+3.	Run the script: ```bash batch_processData.sh```
 		- This will activate the ‘breseqAnalysis’ environment 
 		- Create matrix files with the coverage per base (~30-60 seconds per sample)
 		- Convert index.html to csv files
