@@ -28,16 +28,14 @@
 - Install prerequisistes for analysis of breseq results and for determining coverage 
     1. Create a conda environment: conda activate breseqAnalysis
     2. Install in environment: 
-'''
-{
+```
 conda install bioconda::pysam
 conda install numpy
 conda install matplotlib
 conda install scipy
 pip install html-to-csv
-}
-'''
-            - https://github.com/hanwentao/html2csv  
+```
+- https://github.com/hanwentao/html2csv  
 
 ### To run breseq for multiple samples:
 1)	In the parent folder put the reference file and the “batch_breseq.sh” script
