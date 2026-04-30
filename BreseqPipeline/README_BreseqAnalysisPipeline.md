@@ -44,33 +44,33 @@ pip install html-to-csv
 Initial steps before running:
 	1.	Add a column called "fastQFilename" to sample manifest anywhere in the table (the name should be in row 2 which is the header. The first row is just their irrelevant extra information that you won’t extract) (column order doesn’t matter). 
     2.	In the column use the concatenate function to combine the “Order ID” and the “SeqCoastTubeID” putting an underscore between them and at the end, and making the SeqCoastTubeID have all the same number of digits eg. 001, 025, 100. For consistency this should always be 3 digits, but it is always best to manually check your samples to make sure this is correct.
-            - To do so type ``` =CONCATENATE(‘Order ID well’, “_”, TEXT(’SeqCoastTubeID’,”000”), “_”) ```
-            -  This will create a name like “OrderNumber_SeqCoastTubeID_” eg 6075_001_
+		- To do so type ``` =CONCATENATE(‘Order ID well’, “_”, TEXT(’SeqCoastTubeID’,”000”), “_”) ```
+		- This will create a name like “OrderNumber_SeqCoastTubeID_” eg 6075_001_
 	3. 	Then drag this formatting to the entire column and save your updated metadata file
-            - This is normally the naming convention of the beginning of the SeqCoast FastQ files. You may need to check to make it match the fastq filenames in case they change their naming conventions.
+		- This is normally the naming convention of the beginning of the SeqCoast FastQ files. You may need to check to make it match the fastq filenames in case they change their naming conventions.
 3.	Use “organizingFastQFiles_V2.m” to move fastQ files into folders and name them as folders(SampleName)
-	- This makes a subfolder and puts the R1 and R2 fastq files of one sample into it. The folder is titled with the sample name
+		- This makes a subfolder and puts the R1 and R2 fastq files of one sample into it. The folder is titled with the sample name
 4.	Open the terminal and open the environment with breseq installed: conda activate breseq
 5.	cd to the parent folder 
 6.	Run script in terminal in the parent folder: bash batch_breseq.sh
 
 ## To run Breseq Analysis Pipeline:
 ### Requirements:
-•	Parent folder must contain:
-        ⁃	Reference file
-        ⁃	MATLAB scripts:
-            ⁃	ForOrganizingBreseqOutputs/gettingBreseqData.m
+*	Parent folder must contain:
+		- Reference file
+		- MATLAB scripts:
+			- ForOrganizingBreseqOutputs/gettingBreseqData.m
 Before starting make sure your environment has these two environments installed
-	•	Environment with breseq installed: Name = breseq
-	•	Environment with html2csv installed: Name = breseqAnalysis
+	- Environment with breseq installed: Name = breseq
+	- Environment with html2csv installed: Name = breseqAnalysis
 
 ### Step 1: Organize breseq output files
-1)	In MATLAB in the parent folder (the directory where all you scripts and subfolders are held) run the script: gettingBreseqData.m
+1.	In MATLAB in the parent folder (the directory where all you scripts and subfolders are held) run the script: gettingBreseqData.m
 	    ⁃	This will organize the output files into “Results” folder, then 3 sub-folders: htmlfiles, gdfiles, bamfiles
-2)	In ‘Results’ folder put bash scripts:
+2.	In ‘Results’ folder put bash scripts:
         ⁃	batch_GDrun.sh
         ⁃	batch_processData.sh
-3)	In ‘Results’ folder put ‘BreseqAnalysisPipeline’ MATLAB scripts:
+3.	In ‘Results’ folder put ‘BreseqAnalysisPipeline’ MATLAB scripts:
         ⁃	amplificationCompiler_v4.m
         ⁃	BreseqAnalyzeWGS_wrapper_V4.m
         ⁃	CircaPlotter_v10.m
@@ -78,30 +78,30 @@ Before starting make sure your environment has these two environments installed
         ⁃	JCMCcompiler_V2.m
         ⁃	predictedMutationCompiler_V6assembly.m
         ⁃	Copy-number-and-essentiality-of-all-genes-(E-coli-K-12-substr-MG1655).xlsx
-4)	In ‘ Results/bamfiles’ folder put ‘plotCoverageAllBAM.py’
+4.	In ‘ Results/bamfiles’ folder put ‘plotCoverageAllBAM.py’
 
 ### Step 2: Compile summary files from output files
-1)	In the terminal, cd to the ‘Results’ folder 
-2)	Edit the batch_GDrun.sh: put the name of your reference file 
-	    ⁃	Run the script: bash batch_GDrun.sh
-	    ⁃	This will activate the ‘breseq’ environment and create a comparison table in ‘html’ and ‘tsv’ format
-3)	Run the script: bash batch_processData.sh
-	    ⁃	This will activate the ‘breseqAnalysis’ environment 
-	    ⁃	Create matrix files with the coverage per base (~30-60 seconds per sample)
-	    ⁃	Convert index.html to csv files
-4)	Open the ‘AllComparision.html’ in Microsoft Excel
-        ⁃	In the columns titled with your strain names:
-            1)	Find “~?” and replace with blank
-                ⁃	“?” means that coverage was too low to call that mutation, because a small mutation overlaps a missing coverage or junction region
-            2)	Copy this delta: “Δ” and find and replace with blank
-                ⁃	“Δ” indicates that the mutation in that row is fully contained within a region that is deleted within the specified sample 
-            3)	Save as .xlsx file
-                ⁃	We are replacing these symbols so that MATLAB can read the comparison table without errors and so the mutation that is fully contained within a region that is deleted within the specified sample isn’t counted as a mutation for the strain 
+1.	In the terminal, cd to the ‘Results’ folder 
+2.	Edit the batch_GDrun.sh: put the name of your reference file 
+		- Run the script: bash batch_GDrun.sh
+		- This will activate the ‘breseq’ environment and create a comparison table in ‘html’ and ‘tsv’ format
+3.	Run the script: bash batch_processData.sh
+		- This will activate the ‘breseqAnalysis’ environment 
+		- Create matrix files with the coverage per base (~30-60 seconds per sample)
+		- Convert index.html to csv files
+4.	Open the ‘AllComparision.html’ in Microsoft Excel
+	- In the columns titled with your strain names:
+   		1.	Find “~?” and replace with blank
+			- “?” means that coverage was too low to call that mutation, because a small mutation overlaps a missing coverage or junction region
+     	2.	Copy this delta: “Δ” and find and replace with blank
+			- “Δ” indicates that the mutation in that row is fully contained within a region that is deleted within the specified sample 
+        3.	Save as .xlsx file
+			- We are replacing these symbols so that MATLAB can read the comparison table without errors and so the mutation that is fully contained within a region that is deleted within the specified sample isn’t counted as a mutation for the strain 
 
 ### Step 3: Analyze breseq data 
 - This analysis pipeline will compare across strains evolved on the same drug to the ancestor and create comparison tables and will create circa plots 
-	1)	In Results folder put the MAT files from the “BreseqAnalysisPipeline” [insert names], “AllComparision.xlsx”, “ALLGD.tsv” 
-	2)	In MATLAB in the ‘Results’ folder, open the ‘BreseqAnalyzeWGS_wrapper_V4.m’
-	3)	Fill in the user inputs 
-	4)	Run the script 
+1. In Results folder put the MAT files from the “BreseqAnalysisPipeline” [insert names], “AllComparision.xlsx”, “ALLGD.tsv” 
+2. In MATLAB in the ‘Results’ folder, open the ‘BreseqAnalyzeWGS_wrapper_V4.m’
+3. Fill in the user inputs 
+4. Run the script 
 
