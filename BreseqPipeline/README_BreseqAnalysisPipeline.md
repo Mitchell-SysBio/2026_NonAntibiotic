@@ -5,23 +5,23 @@
 ## This pipeline contains files organize into 4 folders:
 1.	‘ForRunningBreseq’: will organize sequencing data for running breseq pipeline and will run breseq pipeline in a loop
 	- Files:
-	⁃	batch_ breseq.sh
-	⁃	organizingFastQFiles_V2.m
+	- batch_ breseq.sh
+	- organizingFastQFiles_V2.m
 3.	‘ForOrganizingBreseqOutputs’: will compile and organize breseq output files 
-	⁃	Files:
-		⁃	batch_GDrun.sh
-		⁃	batch_processData.sh
-		⁃	gettingBreseqData.m
-		⁃	plotCoverageAllBAM.py 
+   - Files:
+		⁃ batch_GDrun.sh
+		⁃ batch_processData.sh
+		⁃ gettingBreseqData.m
+		- plotCoverageAllBAM.py 
 4.	‘BreseqAnalysisPipeline’: will analyze breseq data and create table outputs and circa plots 
-        ⁃	Files:
-            ⁃	amplificationCompiler_v4.m
-            ⁃	BreseqAnalyzeWGS_wrapper_V4.m
-            ⁃	CircaPlotter_v10.m
-            ⁃	gdColumnNames.mat
-            ⁃	JCMCcompiler_V2.m
-            ⁃	predictedMutationCompiler_V6assembly.m
-            ⁃	Copy-number-and-essentiality-of-all-genes-(E-coli-K-12-substr-MG1655).xlsx
+        ⁃ Files:
+            ⁃ amplificationCompiler_v4.m
+            ⁃ BreseqAnalyzeWGS_wrapper_V4.m
+            ⁃ CircaPlotter_v10.m
+            ⁃ gdColumnNames.mat
+            ⁃ JCMCcompiler_V2.m
+            ⁃ predictedMutationCompiler_V6assembly.m
+            ⁃ Copy-number-and-essentiality-of-all-genes-(E-coli-K-12-substr-MG1655).xlsx
 
 ## Requirements
 -   breseq pipeline installed into a conda environment. Make sure to name the evironment "breseq". See https://github.com/barricklab/breseq/wiki for installation instructions 
