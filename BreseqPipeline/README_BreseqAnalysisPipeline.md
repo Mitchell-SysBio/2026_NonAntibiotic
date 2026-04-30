@@ -44,15 +44,15 @@ pip install html-to-csv
 Initial steps before running:
 	1.	Add a column called "fastQFilename" to sample manifest anywhere in the table (the name should be in row 2 which is the header. The first row is just their irrelevant extra information that you won’t extract) (column order doesn’t matter). 
     2.	In the column use the concatenate function to combine the “Order ID” and the “SeqCoastTubeID” putting an underscore between them and at the end, and making the SeqCoastTubeID have all the same number of digits eg. 001, 025, 100. For consistency this should always be 3 digits, but it is always best to manually check your samples to make sure this is correct.
-            - To do so type =CONCATENATE(‘Order ID well’, “_”, TEXT(’SeqCoastTubeID’,”000”), “_”)
+            - To do so type ``` =CONCATENATE(‘Order ID well’, “_”, TEXT(’SeqCoastTubeID’,”000”), “_”) ```
             -  This will create a name like “OrderNumber_SeqCoastTubeID_” eg 6075_001_
 	3. 	Then drag this formatting to the entire column and save your updated metadata file
             - This is normally the naming convention of the beginning of the SeqCoast FastQ files. You may need to check to make it match the fastq filenames in case they change their naming conventions.
-	3)	Use “organizingFastQFiles_V2.m” to move fastQ files into folders and name them as folders(SampleName) 
-	    ⁃	This makes a subfolder and puts the R1 and R2 fastq files of one sample into it. The folder is titled with the sample name
-	4)	Open the terminal and open the environment with breseq installed: conda activate breseq
-	5)	cd to the parent folder 
-	6)	Run script in terminal in the parent folder: bash batch_breseq.sh
+3.	Use “organizingFastQFiles_V2.m” to move fastQ files into folders and name them as folders(SampleName)
+	- This makes a subfolder and puts the R1 and R2 fastq files of one sample into it. The folder is titled with the sample name
+4.	Open the terminal and open the environment with breseq installed: conda activate breseq
+5.	cd to the parent folder 
+6.	Run script in terminal in the parent folder: bash batch_breseq.sh
 
 ## To run Breseq Analysis Pipeline:
 ### Requirements:
