@@ -2,7 +2,7 @@
 ### The pipeline will perform breseq pipeline and will use a custom Python script to determine the coverage. Using the breseq results and the coverage information the pipeline will subtract the mutations in the ancestral strain from the condition evolved strains. The pipeline will then compiled the mutations across the replicates evolved clones per condition and map the mutations to genomic coordinates for visualization. The pipline will also determine if the effect on the mutated gene was loss-of-function or modification for mutations that breseq does not call the effect (amplification, new junction, & missing coverage). The effect call is based on the same rules as breseq, which uses the location of the mutation and type of mutation. 
 
 
-## This pipeline contains files organize into 4 folders:
+# This pipeline contains files organized into 4 folders:
 1.	‘ForRunningBreseq’: will organize sequencing data for running breseq pipeline and will run breseq pipeline in a loop
 	- Files:
 		- batch_ breseq.sh
@@ -23,7 +23,7 @@
 		- predictedMutationCompiler_V6assembly.m
 		- Copy-number-and-essentiality-of-all-genes-(E-coli-K-12-substr-MG1655).xlsx
 
-## Requirements
+# Requirements
 - breseq pipeline installed into a conda environment. Make sure to name the evironment "breseq". See https://github.com/barricklab/breseq/wiki for installation instructions 
 - Install prerequisistes for analysis of breseq results and for determining coverage 
     1. Create a conda environment: conda activate breseqAnalysis
@@ -37,7 +37,7 @@ pip install html-to-csv
 ```
 - https://github.com/hanwentao/html2csv  
 
-### To run breseq for multiple samples:
+# To run breseq for multiple samples:
 1.	In the parent folder put the reference file and the “batch_breseq.sh” script
 	    - Reference file is the reference genome sequence files in GenBank, GFF3, or FASTA format
 2.	After moving scripts into parent folder open the metadata file from sequencing company (SeqCoast send us a metadata csv file) and do the following steps.
@@ -54,8 +54,8 @@ Initial steps before running:
 5.	cd to the parent folder 
 6.	Run script in terminal in the parent folder: bash batch_breseq.sh
 
-## To run Breseq Analysis Pipeline:
-### Requirements:
+# To run Breseq Analysis Pipeline:
+## Requirements:
 *	Parent folder must contain:
 		- Reference file
 		- MATLAB scripts:
@@ -64,7 +64,7 @@ Before starting make sure your environment has these two environments installed
 	- Environment with breseq installed: Name = breseq
 	- Environment with html2csv installed: Name = breseqAnalysis
 
-### Step 1: Organize breseq output files
+## Step 1: Organize breseq output files
 1.	In MATLAB in the parent folder (the directory where all you scripts and subfolders are held) run the script: gettingBreseqData.m
 	    ⁃	This will organize the output files into “Results” folder, then 3 sub-folders: htmlfiles, gdfiles, bamfiles
 2.	In ‘Results’ folder put bash scripts:
@@ -80,7 +80,7 @@ Before starting make sure your environment has these two environments installed
         ⁃	Copy-number-and-essentiality-of-all-genes-(E-coli-K-12-substr-MG1655).xlsx
 4.	In ‘ Results/bamfiles’ folder put ‘plotCoverageAllBAM.py’
 
-### Step 2: Compile summary files from output files
+## Step 2: Compile summary files from output files
 1.	In the terminal, cd to the ‘Results’ folder 
 2.	Edit the batch_GDrun.sh: put the name of your reference file 
 		- Run the script: bash batch_GDrun.sh
@@ -98,7 +98,7 @@ Before starting make sure your environment has these two environments installed
         3.	Save as .xlsx file
 			- We are replacing these symbols so that MATLAB can read the comparison table without errors and so the mutation that is fully contained within a region that is deleted within the specified sample isn’t counted as a mutation for the strain 
 
-### Step 3: Analyze breseq data 
+## Step 3: Analyze breseq data 
 - This analysis pipeline will compare across strains evolved on the same drug to the ancestor and create comparison tables and will create circa plots 
 1. In Results folder put the MAT files from the “BreseqAnalysisPipeline” [insert names], “AllComparision.xlsx”, “ALLGD.tsv” 
 2. In MATLAB in the ‘Results’ folder, open the ‘BreseqAnalyzeWGS_wrapper_V4.m’
