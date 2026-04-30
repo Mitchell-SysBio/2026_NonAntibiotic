@@ -57,9 +57,9 @@ Initial steps before running:
 # To run Breseq Analysis Pipeline:
 ## Requirements:
 *	Parent folder must contain:
-		- Reference file
-		- MATLAB scripts:
-			- ForOrganizingBreseqOutputs/gettingBreseqData.m
+	- Reference file
+	- MATLAB scripts:
+		- ForOrganizingBreseqOutputs/gettingBreseqData.m
 Before starting make sure your environment has these two environments installed
 	- Environment with breseq installed: Name = breseq
 	- Environment with html2csv installed: Name = breseqAnalysis
