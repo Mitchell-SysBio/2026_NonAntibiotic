@@ -5,10 +5,10 @@
 ## This pipeline contains files organize into 4 folders:
 1.	‘ForRunningBreseq’: will organize sequencing data for running breseq pipeline and will run breseq pipeline in a loop
 	- Files:
-	- batch_ breseq.sh
-	- organizingFastQFiles_V2.m
+		- batch_ breseq.sh
+		- organizingFastQFiles_V2.m
 3.	‘ForOrganizingBreseqOutputs’: will compile and organize breseq output files 
-   - Files:
+   	- Files:
 		⁃ batch_GDrun.sh
 		⁃ batch_processData.sh
 		⁃ gettingBreseqData.m
