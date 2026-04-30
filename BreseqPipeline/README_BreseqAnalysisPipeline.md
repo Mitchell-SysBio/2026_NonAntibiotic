@@ -83,12 +83,12 @@ Before starting make sure your environment has these two environments installed
 ## Step 2: Compile summary files from output files
 1.	In the terminal, cd to the ‘Results’ folder 
 2.	Edit the batch_GDrun.sh: put the name of your reference file 
-		- Run the script: ```bash batch_GDrun.sh```
-		- This will activate the ‘breseq’ environment and create a comparison table in ‘html’ and ‘tsv’ format
+	- Run the script: ```bash batch_GDrun.sh```
+	- This will activate the ‘breseq’ environment and create a comparison table in ‘html’ and ‘tsv’ format
 3.	Run the script: ```bash batch_processData.sh```
-		- This will activate the ‘breseqAnalysis’ environment 
-		- Create matrix files with the coverage per base (~30-60 seconds per sample)
-		- Convert index.html to csv files
+	- This will activate the ‘breseqAnalysis’ environment 
+	- Create matrix files with the coverage per base (~30-60 seconds per sample)
+	- Convert index.html to csv files
 4.	Open the ‘AllComparision.html’ in Microsoft Excel
 	- In the columns titled with your strain names:
    		1.	Find “~?” and replace with blank
