@@ -66,18 +66,18 @@ Before starting make sure your environment has these two environments installed
 
 ## Step 1: Organize breseq output files
 1.	In MATLAB in the parent folder (the directory where all you scripts and subfolders are held) run the script: gettingBreseqData.m
-	    ⁃	This will organize the output files into “Results” folder, then 3 sub-folders: htmlfiles, gdfiles, bamfiles
+	- This will organize the output files into “Results” folder, then 3 sub-folders: htmlfiles, gdfiles, bamfiles
 2.	In ‘Results’ folder put bash scripts:
-        ⁃	batch_GDrun.sh
-        ⁃	batch_processData.sh
+	- batch_GDrun.sh
+	- batch_processData.sh
 3.	In ‘Results’ folder put ‘BreseqAnalysisPipeline’ MATLAB scripts:
-        ⁃	amplificationCompiler_v4.m
-        ⁃	BreseqAnalyzeWGS_wrapper_V4.m
-        ⁃	CircaPlotter_v10.m
-        ⁃	gdColumnNames.mat
-        ⁃	JCMCcompiler_V2.m
-        ⁃	predictedMutationCompiler_V6assembly.m
-        ⁃	Copy-number-and-essentiality-of-all-genes-(E-coli-K-12-substr-MG1655).xlsx
+	- amplificationCompiler_v4.m
+	- BreseqAnalyzeWGS_wrapper_V4.m
+	- CircaPlotter_v10.m
+	- gdColumnNames.mat
+	- JCMCcompiler_V2.m
+	- predictedMutationCompiler_V6assembly.m
+	- Copy-number-and-essentiality-of-all-genes-(E-coli-K-12-substr-MG1655).xlsx
 4.	In ‘ Results/bamfiles’ folder put ‘plotCoverageAllBAM.py’
 
 ## Step 2: Compile summary files from output files
