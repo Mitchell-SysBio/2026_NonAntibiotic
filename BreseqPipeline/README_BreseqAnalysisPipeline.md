@@ -4,16 +4,16 @@
 
 ## This pipeline contains files organize into 4 folders:
 1.	‘ForRunningBreseq’: will organize sequencing data for running breseq pipeline and will run breseq pipeline in a loop
-	⁃	Files:
+	- Files:
 	⁃	batch_ breseq.sh
 	⁃	organizingFastQFiles_V2.m
-2.	‘ForOrganizingBreseqOutputs’: will compile and organize breseq output files 
+3.	‘ForOrganizingBreseqOutputs’: will compile and organize breseq output files 
 	⁃	Files:
 		⁃	batch_GDrun.sh
 		⁃	batch_processData.sh
 		⁃	gettingBreseqData.m
 		⁃	plotCoverageAllBAM.py 
-3.	‘BreseqAnalysisPipeline’: will analyze breseq data and create table outputs and circa plots 
+4.	‘BreseqAnalysisPipeline’: will analyze breseq data and create table outputs and circa plots 
         ⁃	Files:
             ⁃	amplificationCompiler_v4.m
             ⁃	BreseqAnalyzeWGS_wrapper_V4.m
