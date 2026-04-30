@@ -9,30 +9,34 @@
 		- organizingFastQFiles_V2.m
 3.	‘ForOrganizingBreseqOutputs’: will compile and organize breseq output files 
    	- Files:
-		⁃ batch_GDrun.sh
-		⁃ batch_processData.sh
-		⁃ gettingBreseqData.m
+		- batch_GDrun.sh
+		- batch_processData.sh
+		- gettingBreseqData.m
 		- plotCoverageAllBAM.py 
 4.	‘BreseqAnalysisPipeline’: will analyze breseq data and create table outputs and circa plots 
-        ⁃ Files:
-            ⁃ amplificationCompiler_v4.m
-            ⁃ BreseqAnalyzeWGS_wrapper_V4.m
-            ⁃ CircaPlotter_v10.m
-            ⁃ gdColumnNames.mat
-            ⁃ JCMCcompiler_V2.m
-            ⁃ predictedMutationCompiler_V6assembly.m
-            ⁃ Copy-number-and-essentiality-of-all-genes-(E-coli-K-12-substr-MG1655).xlsx
+   	- Files:
+		- amplificationCompiler_v4.m
+		- BreseqAnalyzeWGS_wrapper_V4.m
+		- CircaPlotter_v10.m
+		- gdColumnNames.mat
+		- JCMCcompiler_V2.m
+		- predictedMutationCompiler_V6assembly.m
+		- Copy-number-and-essentiality-of-all-genes-(E-coli-K-12-substr-MG1655).xlsx
 
 ## Requirements
--   breseq pipeline installed into a conda environment. Make sure to name the evironment "breseq". See https://github.com/barricklab/breseq/wiki for installation instructions 
--   Install prerequisistes for analysis of breseq results and for determining coverage 
-    1) Create a conda environment: conda activate breseqAnalysis
-    2) Install in environment: 
-        ▪	conda install bioconda::pysam
-        ▪	conda install numpy
-        ▪	conda install matplotlib
-        ▪	conda install scipy
-        ▪	pip install html-to-csv
+- breseq pipeline installed into a conda environment. Make sure to name the evironment "breseq". See https://github.com/barricklab/breseq/wiki for installation instructions 
+- Install prerequisistes for analysis of breseq results and for determining coverage 
+    1. Create a conda environment: conda activate breseqAnalysis
+    2. Install in environment: 
+'''
+{
+conda install bioconda::pysam
+conda install numpy
+conda install matplotlib
+conda install scipy
+pip install html-to-csv
+}
+'''
             - https://github.com/hanwentao/html2csv  
 
 ### To run breseq for multiple samples:
