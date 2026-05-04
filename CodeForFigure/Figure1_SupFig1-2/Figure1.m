@@ -79,78 +79,7 @@ sgtitle(sprintf("%i hr", ICtimepoint))
 saveas(fig, 'Fig1D_IC50bar_8hr.png')
 exportgraphics(fig, 'Fig1D_IC50bar_8hr.svg', 'ContentType', 'vector');
 
-%% Supplementary Figure 1 dose response curves
-fig = figure('color','w');
-tiledlayout(4,5)
-orderDrugs = [ABXorder; nonABXorder];
-orderDrugs{contains(orderDrugs, 'Tetracycline')} = 'Tetracycline';
-ancDose = cell(length(orderDrugs),1);
-evoDose = cell(length(orderDrugs),1);
-for k = 1:length(orderDrugs)
-    if k == 21
-        fig = figure('color','w');
-        tiledlayout(4,5)
-    end 
-    temp = strip(orderDrugs{k},'both',' ');
-    temp = strip(temp,'both',' ');
-    % temp = erase(temp,' ');
-    inds = find(IC50table.Timepoint==ICtimepoint & contains(IC50table.Drug, temp)); % getting index of drug
-    subtable = IC50table(inds,:); % making sub table of only drug at 8h
-    nexttile; hold on;
-    mX = [];labelPlots = []; colors=lines(5);
-    colors(3,:)=[];
-    colors = [colors; 0.5 0.5 0.5];
-    for k1 = 1:5
-        % Looping through each strain to get the average of the 3 replicates
-        % per line
-        predCurve = subtable.('PredictedCurve'){k1,:}; 
-        doseResponse = subtable.('DoseResponse'){k1,:}; 
-        x= []; y =[]; xDose = []; yDose =[]; 
-        for k2 =1:length(predCurve)
-            x = [x; predCurve{k2,1}{1,1}];
-            y = [y;predCurve{k2,1}{1,2}];
-            xDose = [xDose, doseResponse{k2,1}{1,1}];
-            yDose = [yDose, doseResponse{k2,1}{1,2}];
-        end 
-        p = plot(mean(x), mean(y), 'Color',colors(k1,:), 'LineWidth',2);
-        labelPlots = [labelPlots,p];
-        scatter(subtable{k1,"AvgIC50"}, mean(subtable{k1,"ReponseRepsIC50"}{1}),30, colors(k1,:), 'LineWidth',2)
-        scatter(mean(xDose,2), mean(yDose,2),10, colors(k1,:),"filled")
-        mX = [mX, max(subtable.('DoseResponse'){1,:}{1,1}{1})]; 
-        if k1 == 1
-            evoDose{k} = mean(xDose,2);
-        elseif k1==5
-            ancDose{k}= mean(xDose,2);
-        end 
-    end
-    ylim([-0.1 1.25])
-    xlim([-0.1, max(mX)])
-    title(orderDrugs{k})
-    set(gca, 'Xscale', 'log')
-    %legend(labelPlots, subtable.FullName, 'Location', 'eastoutside')
-    box on; grid on; axis square;
-end 
-
-%% Getting low and high concentration used for dose-response 
-evoLow = nan(length(evoDose),1);
-evoHigh = nan(length(evoDose),1);
-evoDil = nan(length(evoDose),1);
-ancLow = nan(length(ancDose),1);
-ancHigh = nan(length(ancDose),1);
-ancDil = nan(length(ancDose),1);
-for p = 1:length(evoDose)
-    sEvo = sort(evoDose{p}, 'ascend');
-    sAnc = sort(ancDose{p},'ascend');
-    evoLow(p) = sEvo(2); 
-    evoHigh(p) = sEvo(end); 
-    evoDil(p) = sEvo(3)/sEvo(2);
-    ancLow(p) = sAnc(2); 
-    ancHigh(p) = sAnc(end); 
-    ancDil(p) = sAnc(3)/sAnc(2);
-end 
-dosedata = table(orderDrugs, evoLow, evoHigh,evoDil, ancLow, ancHigh, ancDil);
-
-%% Supplementary Figure 2: Comparing autoresistance between IC and BMD bar
+%% Supplementary Figure 1: Comparing autoresistance between IC and BMD bar
 abxLFC = maskLFCtable(maskLFCtable.Type==1,:); 
 labelBMD = unique(abxLFC.Drug); 
 labelBMD{strcmp(labelBMD,'Tetracycline HCl')} = 'Tetracycline';
@@ -188,6 +117,7 @@ plot(0:8,0:8, 'k--')
 
 % Comparing autoresistance between IC and BMD bar
 fig2 = figure;
+subplot(2,1,1)
 hold on
 storeLFCBMD = [];
 for p1 = 1:length(labelIC)
@@ -197,15 +127,32 @@ for p1 = 1:length(labelIC)
         idx = find(contains(labelBMD, labelIC(p1)));
     end 
     bar(p1,LFCIC(p1),'FaceColor', ABXmech.Colors{mechidx(idx)})
-    bar(p1, -1*LFCBMD(idx), 'FaceColor', ABXmech.Colors{mechidx(idx)})
-    scatter(zeros(1,4)+p1, LFCICpoints(p1,:),'ro','XJitter','rand','XJitterWidth',0.5)
-    scatter(zeros(1,4)+p1, -1*autoRes(idx,:),'ko','XJitter','rand','XJitterWidth',0.5)
+    scatter(zeros(1,4)+p1, LFCICpoints(p1,:),'ko','XJitter','rand','XJitterWidth',0.5)
 end 
 xticks(1:length(labelIC))
 xticklabels(labelIC)
 grid on; box on;
-ylim([-8,8])
+ylim([0,8])
 ylabel('log2FC')
 title(sprintf('Pos=IC; Neg=BMD; r = %f pvalue = %f', R(1,2), Pvals(1,2)))
+
+subplot(2,1,2)
+hold on
+storeLFCBMD = [];
+for p1 = 1:length(labelIC)
+    if strcmp(labelIC(p1),'Tetracycline HCl')
+       idx = find(contains(labelBMD, 'Tetracycline'));
+    else 
+        idx = find(contains(labelBMD, labelIC(p1)));
+    end 
+    bar(p1, LFCBMD(idx), 'FaceColor', ABXmech.Colors{mechidx(idx)})
+    scatter(zeros(1,4)+p1, autoRes(idx,:),'ko','XJitter','rand','XJitterWidth',0.5)
+end 
+xticks(1:length(labelIC))
+xticklabels(labelIC)
+grid on; box on;
+ylim([0,8])
+ylabel('log2FC')
+title('BMD')
 saveas(fig2, 'Fig1Supplementary_ICvsBMD.png')
 exportgraphics(fig2, 'SupplementaryFig2_ICvsBMD.svg', 'ContentType', 'vector');

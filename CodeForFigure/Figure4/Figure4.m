@@ -76,7 +76,7 @@ for j1 = 1:height(genesPerPosition)
     mycolors = ABXmech.Colors(colorInd)'; 
     mycolors = cell2mat(mycolors);
     scatter(genesPerPosition{j1,1}, genesPerPosition{j1,3},[], mycolors, 'filled', 'SizeData',100)
-    if length(genesPerPosition{j1,3})>=1
+    if length(genesPerPosition{j1,3})>=0
         text(genesPerPosition{j1,1},-0.2 ,genesPerPosition{j1,5}(1,1),"Rotation",90, 'VerticalAlignment','baseline', 'HorizontalAlignment', 'right')
     end
 end 
