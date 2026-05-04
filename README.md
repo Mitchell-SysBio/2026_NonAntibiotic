@@ -9,16 +9,16 @@
 
 organizeMutation.m: 
 
-### Figure 1 & Supplementary Figures 1 & 2: 
-Figure1.m is a script that outputs Figure 1C, Supplementary Figures 1 & 2. It calculates the log2 fold change in IC50 and MGC and plots the bar plots of the log2 fold change. It also plots the dose-response curves. 
+### Figure 1 & Supplementary Figures 1: 
+Figure1.m is a script that outputs Figure 1C, Supplementary Figures 1. It calculates the log2 fold change in IC50 and MGC and plots the bar plots of the log2 fold change.
 - Uses data files: 
     - AutoResistanceData_2026-04-24.mat
     - ABXmechColorMap.mat
     - allLFC_021926.mat
     - FigureOrder.mat
 
-### Figure 2 & Supplementary Figures 3 & 4: 
-Figure2.m is a script that outputs Figure 2 A & B, and Supplementary Figures 3 & 4. It plots the cross-resistance and cross-sensitivity to a panel of antibiotics in bar and radar plots. 
+### Figure 2 & Supplementary Figures 2: 
+Figure2.m is a script that outputs Figure 2 A & B, and Supplementary Figures 2. It plots the cross-resistance and cross-sensitivity to a panel of antibiotics in bar and radar plots. 
 - Uses data files:
     - ABXmechColorMap.mat
     - allLFC_021926.mat
