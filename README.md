@@ -14,8 +14,6 @@ Code to create figures and analyze data
 - FigureOrder.mat: contains order of antibiotic and non-antbiotic names for figures 
 - MG1655_NC_00913_gene_positions.csv: contains start and end position of genes in E. coli MG1655 
 
-organizeMutation.m: 
-
 ### Figure 1 & Supplementary Figures 1: 
 Figure1.m is a script that outputs Figure 1C, Supplementary Figures 1. It calculates the log2 fold change in IC50 and MGC and plots the bar plots of the log2 fold change.
 - Uses data files: 
