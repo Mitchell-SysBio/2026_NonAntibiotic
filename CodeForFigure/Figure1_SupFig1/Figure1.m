@@ -9,7 +9,7 @@ cd Figure1_SupFig1-2/
 ICtimepoint = 8;
 %% Figure 1C:Bar graph of IC change from wt + Fig 1b: Pie chart of mechanisms 
 meanLFCICs = nan(length(uniqueDrugs),1);
-ttestICs =  nan(length(uniqueDrugs),1);
+ttestICs =  nan(length(uniqueDrugs),2);
 meanLineLFCICs = cell(length(uniqueDrugs),1);
 types = cell(length(uniqueDrugs),1);
 mechs = cell(length(uniqueDrugs),1);
@@ -26,7 +26,7 @@ for d = 1:length(uniqueDrugs)
     meanLineLFCICs{d} = IC50table.AvgIC50(idx(~wtidx))./wtICs(d); % average LFC of 3 replicates of each line
     % mean of Lines > mean of wt: using unequal because variances are
     % unlikely to be the same
-    ttestICs(d) = ttest2(linesIC,wtICs(d),'Tail', 'right','Alpha',0.05, 'Vartype','unequal');
+    [ttestICs(d,1), ttestICs(d,2)] = ttest2(linesIC,IC50table.RepsIC50{idx(wtidx)},'Tail', 'right','Alpha',0.05, 'Vartype','unequal');
     types(d) = unique(allData.Type(strcmp(uniqueDrugs(d), allData.DrugName) & strcmp("MiNoLi wt", allData.Strain)));
     mechs(d) = unique(allData.Mechanism(strcmp(uniqueDrugs(d), allData.DrugName) & strcmp("MiNoLi wt", allData.Strain)));
 end
@@ -57,8 +57,16 @@ for i=1:2
     for d1 = indexes'
         scatter(zeros(length(meanLineLFCICs{d1}),1)+d2, log2(meanLineLFCICs{d1}),'ko','filled','XJitter','rand','XJitterWidth',0.5)
         temp2 = [temp2; log2(meanLineLFCICs{d1})'];
-        if ttestICs(d1) ==1
+        if ttestICs(d1,1)==1 && ttestICs(d1,2)<0.0001
+            plot(d2, log2(meanLFCICs(d1))+1.5, "k*")
+        elseif ttestICs(d1,1)==1 && ttestICs(d1,2)<0.001
+            plot(d2, log2(meanLFCICs(d1))+1.5, "g*")
+        elseif ttestICs(d1,1)==1 && ttestICs(d1,2)<0.01
+            plot(d2, log2(meanLFCICs(d1))+1, "b*")
+        elseif ttestICs(d1,1)==1 && ttestICs(d1,2)<0.05
             plot(d2, log2(meanLFCICs(d1))+1, "r*")
+        else
+            plot(d2, log2(meanLFCICs(d1))+1, "ro")
         end
         d2 = d2+1;
     end
@@ -74,6 +82,9 @@ for i=1:2
         LFCICpoints = temp2; 
         labelIC = uniqueDrugs(indexes);
     end 
+
+    p=[plot(nan,nan, 'k*'),plot(nan,nan, 'g*'),plot(nan,nan, 'b*'),plot(nan,nan, 'r*')];
+    legend(p, {'p<0.0001','p<0.001', 'p<0.01','p<0.05'})
 end
 sgtitle(sprintf("%i hr", ICtimepoint))
 saveas(fig, 'Fig1D_IC50bar_8hr.png')

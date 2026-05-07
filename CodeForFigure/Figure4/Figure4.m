@@ -126,3 +126,4 @@ title(sprintf('%s position of local coding mutations:\n total mutations = %i\n L
 
 %% lon mutation in multidrug resistors
 loninfo = allGenes(strcmp(allGenes.gene, 'lon'),:);
+
