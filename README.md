@@ -1,4 +1,11 @@
 # 2026_NonAntibiotic
+
+# BreseqAnalysisPipeline
+Look at README in that folder for information on breseq analysis pipeline 
+
+# CodeForFigure 
+Code to create figures and analyze data
+
 ### Data files: 
 - ABXmechColorMap.mat: contains mechanism and color information for antibiotic classes 
 - AllEvo_WGSresults_20260410.mat: contains mutation results of "breseq analysis" 
