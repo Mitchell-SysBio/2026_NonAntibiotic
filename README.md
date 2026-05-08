@@ -1,20 +1,33 @@
 # 2026_NonAntibiotic
 
-# BreseqAnalysisPipeline
-Look at README in that folder for information on breseq analysis pipeline 
+# BreseqAnalysisPipeline Folder: 
+Breseq analysis pipeline will run breseq (https://github.com/barricklab/breseq), determine amplifications, and compile together mutations for replicates of each drug condition. More details are in the README in the folder. The output is "AllEvo_WGSresults_20260410.mat".
 
-# CodeForFigure 
+# CodeForFigure Folder: 
 Code to create figures and analyze data
 
-## Code to analyze data for creating figures
-### Auto-resistance Folder
+# Code to analyze data for creating figures
+## Auto-resistance Folder: all code and data to determine auto-resistance
+### Code:
+- gettingDoseResponseData.m: script to organize raw dose response data from "GrowthCurve_All_Results.xlsx" into "Evo_IC50Data_2026-04-22.mat" using the metadata from "AllGrowthCurveMetadata_V2.xlsx".
+- AutoResistance_ICdata.m: script to calculate the IC50 for each drug and strain at user-inputed timepoint. Uses the dose response data from "Evo_IC50Data_2026-04-22.mat". Outputs the IC50 into "AutoResistanceData_2026-04-24.mat", and graphs of normalized growth curves and the dose-response curves. Uses the "calcDoseResponse_v2.m" function to calculate the IC50.
+- calcDoseResponse_v2.m: function to calculate the IC50 at a user specified time point
+### Data: 
+- GrowthCurve_All_Results.xlsx: each sheet corresponds to one plate of a Logphase dose-response experiment
+- AllGrowthCurveMetadata_V2.xlsx: contains data on which sheet and cell in "GrowthCurve_All_Results.xlsx" corresponds to a drug, drug concentration, and strain
+- Evo_IC50Data_2026-04-22.mat: raw dose-response data now organized for each drug, concentration, and strain
 
-### Cross-resistance Folder
+## Cross-resistance Folder: all code and data to determine cross-resistance 
+### Code
+- organizeMGCdata_FINAL.m: script to organize the MGC results and calculate the log2 fold change from the ancester. The MGC results were determined using the AssiST Pipeline (https://github.com/Mitchell-SysBio/AssiST) and are in mat files. The script takes the mat files from the different sets of broth microdilution experiments and correlates it with the strain and drug information from the metadata files ('platemap..xlsx'). It then determines the median MGC of all the ancestor replicates for each antibiotic and uses that determine the log2FC. The script will output the log2FC in "allLFC_021926.mat". 
+### Data: 
+- Mat files of MGC results: MGCresults4evo_05-Sep-2024.mat, MGCresults5FU_RFB_26-Sep-2024.mat, MGCresultsABX_06-Sep-2024.mat, MGCresultsCarmofur_02-Jul-2025.mat,MGCresultsChlorhexidine_12-Sep-2024.mat, MGCresultsNonABX_06-Sep-2024.mat
+- Metadata files: platemap4Evo.xlsx, platemapABX.xlsx, platemapCarmofurRepeat.xlsx, platemapNonABX.xlsx
 
-
+# Code and data for creating figures 
 ### Data files: 
 - ABXmechColorMap.mat: contains mechanism and color information for antibiotic classes 
-- AllEvo_WGSresults_20260410.mat: contains mutation results of "breseq analysis" 
+- AllEvo_WGSresults_20260410.mat: contains mutation results of "breseq analysis pipeline" 
 - allLFC_021926.mat: contains log2 fold change and MGC results of broth microdilution assay 
 - AutoResistanceData_2026-04-24.mat: contains IC50 results of dose-response assay 
 - FigureOrder.mat: contains order of antibiotic and non-antbiotic names for figures 
