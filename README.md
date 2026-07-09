@@ -33,22 +33,22 @@ Code to create figures and analyze data
 - FigureOrder.mat: contains order of antibiotic and non-antbiotic names for figures 
 - MG1655_NC_00913_gene_positions.csv: contains start and end position of genes in E. coli MG1655 
 
-### Figure 1 & Supplementary Figures 1: 
-Figure1.m is a script that outputs Figure 1C, Supplementary Figures 1. It calculates the log2 fold change in IC50 and MGC and plots the bar plots of the log2 fold change.
+### Figure 1 & Supplementary Figures 1 & 2: 
+Figure1.m is a script that outputs Figure 1C, Supplementary Figures 1 & 2. It calculates the log2 fold change in IC50 and MGC and plots the bar plots of the log2 fold change. It compares the IC50 and MGC using box plots.
 - Uses data files: 
     - AutoResistanceData_2026-04-24.mat
     - ABXmechColorMap.mat
     - allLFC_021926.mat
     - FigureOrder.mat
 
-### Figure 2 & Supplementary Figures 2: 
+### Figure 2 & Supplementary Figures 3: 
 Figure2.m is a script that outputs Figure 2 A & B, and Supplementary Figures 2. It plots the cross-resistance and cross-sensitivity to a panel of antibiotics in bar and radar plots. 
 - Uses data files:
     - ABXmechColorMap.mat
     - allLFC_021926.mat
 
-### Figure 3 & Supplementary Figure 5: 
-Figure3.m is a script that outputs Figure 3 A,B & C and Supplementary Figures 5. It calls on "organizeMutation" function to get the mutated genes for all strains and the position of the mutation. The script plots the type, effect, and position of mutations in pie charts and plots the frequency of mutation of a gene. It also plots the position of the mutated gene in the genome. 
+### Figure 3: 
+Figure3.m is a script that outputs Figure 3 A,B & C. It calls on "organizeMutation" function to get the mutated genes for all strains and the position of the mutation. The script plots the type, effect, and position of mutations in pie charts and plots the frequency of mutation of a gene. It also plots the position of the mutated gene in the genome. 
 - Uses data files: 
   - ABXmechColorMap.mat
   - AllEvo_WGSresults_20260410.mat
